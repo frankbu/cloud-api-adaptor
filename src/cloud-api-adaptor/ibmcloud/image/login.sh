@@ -27,9 +27,9 @@ fi
 
 required_plugins=(vpc-infrastructure cloud-object-storage)
 # mapfile -t installed_plugins < <(ibmcloud plugin list --output json | jq -r '.[].Name')
-# shellcheck disable=SC2207
-installed_plugins=($(ibmcloud plugin list --output json | jq -r '.[].Name'))
 # ^^^ mapfile is not available on mac and is not needed here anyway
+# shellcheck disable=SC2207 the input is a list of names, 1 per line without spaces
+installed_plugins=($(ibmcloud plugin list --output json | jq -r '.[].Name'))
 
 for plugin in "${required_plugins[@]}"; do
     if ! [[ -n "${installed_plugins-}" && " ${installed_plugins[*]} " == *" $plugin "* ]]; then
