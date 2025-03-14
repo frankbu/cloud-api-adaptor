@@ -41,6 +41,7 @@ then
 fi
 
 if [[ "$CLOUD_PROVIDER" == "azure" || "$CLOUD_PROVIDER" == "ibmcloud" || "$CLOUD_PROVIDER" == "generic" ]] && [[ "$PODVM_DISTRO" == "ubuntu" ]]; then
+    echo ">>>>>>> CLOUD_PROVIDER: $CLOUD_PROVIDER"
 
     export DEBIAN_FRONTEND=noninteractive
     curl -fsSL https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key | sudo apt-key add -
