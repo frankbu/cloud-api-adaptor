@@ -40,9 +40,7 @@ then
     esac
 fi
 
-if [[ "$CLOUD_PROVIDER" == "azure" || "$CLOUD_PROVIDER" == "ibmcloud" || "$CLOUD_PROVIDER" == "generic" ]] && [[ "$PODVM_DISTRO" == "ubuntu" ]]; then
-    echo ">>>>>>> CLOUD_PROVIDER: $CLOUD_PROVIDER"
-
+if [[ "$CLOUD_PROVIDER" == "azure" || "$CLOUD_PROVIDER" == "generic" ]] && [[ "$PODVM_DISTRO" == "ubuntu" ]]; then
     export DEBIAN_FRONTEND=noninteractive
     curl -fsSL https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key | sudo apt-key add -
     echo "deb [arch=amd64] https://download.01.org/intel-sgx/sgx_repo/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/intel-sgx.list
@@ -50,7 +48,7 @@ if [[ "$CLOUD_PROVIDER" == "azure" || "$CLOUD_PROVIDER" == "ibmcloud" || "$CLOUD
     pushd /tmp
     git clone -b main https://github.com/canonical/tdx.git
     cd tdx
-    sudo ./setup-tdx-host.sh
+    sudo ./setup-tdx-guest.sh
     popd
 
     sudo apt-get update
